@@ -306,10 +306,11 @@ public class Instyper {
     static void showFirstRunTutorial() {
         if(Files.exists(FIRST_RUN_FLAG)) return;
         
-        JOptionPane.showMessageDialog(null, 
-            "Welcome to Instant Typer!\n\n" +
-            "Use Ctrl+Alt+Space to start/stop voice typing.\n" +
-            "Right-click the tray icon to change models.", 
+        JOptionPane.showMessageDialog(null, """
+                                            Welcome to Instant Typer!
+                                            
+                                            Use Ctrl+Alt+Space to start/stop voice typing.
+                                            Right-click the tray icon to change models.""", 
             "First Run Tutorial", JOptionPane.INFORMATION_MESSAGE);
         
         try { Files.createFile(FIRST_RUN_FLAG); } 

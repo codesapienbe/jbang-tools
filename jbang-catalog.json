@@ -2,143 +2,178 @@
   "aliases": {
     "jobops": {
       "description": "AI motivation letter daemon with web crawling",
-      "uri": "jobops.java"
+      "script-ref": "jobops/JobOps.java",
+      "tags": ["jobops", "ai", "motivation", "letter", "daemon", "web", "crawling"]
     },
     "instyper": {
       "description": "Ultra-low latency speech-to-text conversion",
-      "uri": "instyper.java"
+      "script-ref": "instyper/Instyper.java",
+      "tags": ["instyper", "speech", "to", "text", "conversion", "ultra", "low", "latency"]
     },
     "offlan": {
       "description": "Completely offline translator (90+ languages)",
-      "uri": "offlan.java"
+      "script-ref": "offlan/Offlan.java",
+      "tags": ["offlan", "translator", "offline", "90+", "languages"]
     },
     "inspeak": {
       "description": "Instant text-to-speech with file monitoring",
-      "uri": "inspeak.java"
+      "script-ref": "inspeak/Inspeak.java",
+      "tags": ["inspeak", "text", "to", "speech", "file", "monitoring"]
     },
     "qproj": {
       "description": "Project generator with 100k+ templates",
-      "uri": "qproj.java"
+      "script-ref": "qproj/Qproj.java",
+      "tags": ["qproj", "project", "generator", "100k+", "templates"]
     },
     "pertun": {
       "description": "Performance tuning and OS optimization",
-      "uri": "pertun.java"
+      "script-ref": "pertun/Pertun.java",
+      "tags": ["pertun", "performance", "tuning", "os", "optimization"]
     },
     "sysmon": {
       "description": "Comprehensive system monitoring with AI predictions",
-      "uri": "sysmon.java"
+      "script-ref": "sysmon/Sysmon.java",
+      "tags": ["sysmon", "system", "monitoring", "ai", "predictions"]
     },
     "netwatch": {
       "description": "Network traffic monitoring with threat detection",
-      "uri": "netwatch.java"
+      "script-ref": "netwatch/Netwatch.java",
+      "tags": ["netwatch", "network", "traffic", "monitoring", "threat", "detection"]
     },
     "procman": {
       "description": "Advanced process manager with AI recommendations",
-      "uri": "procman.java"
+      "script-ref": "procman/Procman.java",
+      "tags": ["procman", "process", "manager", "ai", "recommendations"]
     },
     "diskman": {
       "description": "Intelligent disk analyzer with smart cleanup",
-      "uri": "diskman.java"
+      "script-ref": "diskman/Diskman.java",
+      "tags": ["diskman", "disk", "analyzer", "smart", "cleanup"]
     },
     "powmon": {
       "description": "Battery and power management with learning optimization",
-      "uri": "powmon.java"
+      "script-ref": "powmon/Powmon.java",
+      "tags": ["powmon", "battery", "power", "management", "learning", "optimization"]
     },
     "lazyme": {
       "description": "Cross-platform face recognition authentication",
-      "uri": "lazyme.java"
+      "script-ref": "lazyme/Lazyme.java",
+      "tags": ["lazyme", "face", "recognition", "authentication", "cross-platform"]
     },
     "safeclip": {
       "description": "AI-powered clipboard security scanner",
-      "uri": "safeclip.java"
+      "script-ref": "safeclip/Safeclip.java",
+      "tags": ["safeclip", "clipboard", "security", "scanner", "ai"]
     },
     "mahrem": {
       "description": "Universal end-to-end message encryption",
-      "uri": "mahrem.java"
+      "script-ref": "mahrem/Mahrem.java",
+      "tags": ["mahrem", "end-to-end", "message", "encryption", "universal"]
     },
     "vaultray": {
       "description": "Lightweight password manager with tray integration",
-      "uri": "vaultray.java"
+      "script-ref": "vaultray/Vaultray.java",
+      "tags": ["vaultray", "password", "manager", "tray", "integration"]
     },
     "screengrab": {
       "description": "Professional screen capture with AI annotation",
-      "uri": "screengrab.java"
+      "script-ref": "screengrab/Screengrab.java",
+      "tags": ["screengrab", "screen", "capture", "ai", "annotation"]
     },
     "medilook": {
       "description": "AI-powered video content search",
-      "uri": "medilook.java"
+      "script-ref": "medilook/Medilook.java",
+      "tags": ["medilook", "video", "content", "search", "ai"]
     },
     "newlook": {
       "description": "Real-time appearance modification with computer vision",
-      "uri": "newlook.java"
+      "script-ref": "newlook/Newlook.java",
+      "tags": ["newlook", "appearance", "modification", "computer", "vision"]
     },
     "audioctl": {
       "description": "Advanced audio control with device switching",
-      "uri": "audioctl.java"
+      "script-ref": "audioctl/Audioctl.java",
+      "tags": ["audioctl", "audio", "control", "device", "switching"]
     },
     "clipstack": {
       "description": "Advanced clipboard manager with AI categorization",
-      "uri": "clipstack.java"
+      "script-ref": "clipstack/Clipstack.java",
+      "tags": ["clipstack", "clipboard", "manager", "ai", "categorization"]
     },
     "quickfile": {
       "description": "Lightning-fast file search with learning algorithms",
-      "uri": "quickfile.java"
+      "script-ref": "quickfile/Quickfile.java",
+      "tags": ["quickfile", "file", "search", "learning", "algorithms"]
     },
     "filewatch": {
       "description": "Real-time file system monitoring with anomaly detection",
-      "uri": "filewatch.java"
+      "script-ref": "filewatch/Filewatch.java",
+      "tags": ["filewatch", "file", "system", "monitoring", "anomaly", "detection"]
     },
     "syncmate": {
       "description": "Intelligent file synchronization with smart conflict resolution",
-      "uri": "syncmate.java"
+      "script-ref": "syncmate/Syncmate.java",
+      "tags": ["syncmate", "file", "synchronization", "smart", "conflict", "resolution"]
     },
     "winman": {
       "description": "Advanced window manager with learning-based layouts",
-      "uri": "winman.java"
+      "script-ref": "winman/Winman.java",
+      "tags": ["winman", "window", "manager", "learning", "layouts"]
     },
     "trayorg": {
       "description": "System tray organizer with AI importance ranking",
-      "uri": "trayorg.java"
+      "script-ref": "trayorg/Trayorg.java",
+      "tags": ["trayorg", "system", "tray", "organizer", "ai", "importance", "ranking"]
     },
     "displayctl": {
       "description": "Advanced display control with adaptive ML settings",
-      "uri": "displayctl.java"
+      "script-ref": "displayctl/Displayctl.java",
+      "tags": ["displayctl", "display", "control", "adaptive", "ml", "settings"]
     },
     "quickset": {
       "description": "Rapid system settings access with contextual suggestions",
-      "uri": "quickset.java"
+      "script-ref": "quickset/Quickset.java",
+      "tags": ["quickset", "system", "settings", "access", "contextual", "suggestions"]
     },
     "servicectl": {
       "description": "System service manager with predictive failure detection",
-      "uri": "servicectl.java"
+      "script-ref": "servicectl/Servicectl.java",
+      "tags": ["servicectl", "system", "service", "manager", "predictive", "failure", "detection"]
     },
     "voicebytes": {
       "description": "Audio analysis with real-time speaker isolation",
-      "uri": "voicebytes.java"
+      "script-ref": "voicebytes/Voicebytes.java",
+      "tags": ["voicebytes", "audio", "analysis", "real-time", "speaker", "isolation"]
     },
     "netguard": {
       "description": "Network security monitor with ML threat detection",
-      "uri": "netguard.java"
+      "script-ref": "netguard/Netguard.java",
+      "tags": ["netguard", "network", "security", "monitor", "ml", "threat", "detection"]
     },
     "vpnmon": {
       "description": "VPN connection monitor with intelligent server selection",
-      "uri": "vpnmon.java"
+      "script-ref": "vpnmon/Vpnmon.java",
+      "tags": ["vpnmon", "vpn", "connection", "monitor", "intelligent", "server", "selection"]
     },
     "pingmon": {
       "description": "Network connectivity monitor with predictive issue detection",
-      "uri": "pingmon.java"
+      "script-ref": "pingmon/Pingmon.java",
+      "tags": ["pingmon", "network", "connectivity", "monitor", "predictive", "issue", "detection"]
     },
     "facebytes": {
       "description": "Event photo management with privacy features",
-      "uri": "facebytes.java"
+      "script-ref": "facebytes/Facebytes.java",
+      "tags": ["facebytes", "event", "photo", "management", "privacy", "features"]
     },
     "visiplay": {
       "description": "Touchless gaming platform using hand-tracking",
-      "uri": "visiplay.java"
+      "script-ref": "visiplay/Visiplay.java",
+      "tags": ["visiplay", "touchless", "gaming", "platform", "hand", "tracking"]
     },
     "feedme": {
       "description": "AI-powered food inspection and nutrition analysis",
-      "uri": "feedme.java"
+      "script-ref": "feedme/Feedme.java",
+      "tags": ["feedme", "ai", "food", "inspection", "nutrition", "analysis"]
     }
   }
-} 
+}

@@ -1,3 +1,4 @@
+package jobops;
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS info.picocli:picocli:4.7.5
 //DEPS com.fasterxml.jackson.core:jackson-databind:2.16.1
