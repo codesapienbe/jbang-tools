@@ -58,6 +58,15 @@ public class Instyper {
     static final int AUDIO_CHANNELS = 1;
     static final int FRAMES_PER_BUFFER = 8000;
 
+    static Model currentModelInstance;
+    static JDialog modelLoadingDialog;
+    static JProgressBar modelProgressBar;
+    static JLabel modelStatusLabel;
+
+    static WatchService watchService;
+    static WatchKey watchKey;
+    static Set<String> currentModels = new HashSet<>();
+
     public static void main(String... args) throws Exception {
         System.setProperty("flatlaf.uiScale", "1.0");
         UIManager.setLookAndFeel(new FlatLightLaf());
@@ -69,6 +78,7 @@ public class Instyper {
         initializeSpeechRecognition();
         registerGlobalHotkey();
         showFirstRunTutorial();
+        startModelsWatcher();
         
         while(true) Thread.sleep(1000);
     }
@@ -98,11 +108,15 @@ public class Instyper {
         MenuItem toggleItem = new MenuItem("Start Listening");
         toggleItem.addActionListener(e -> toggleListening(toggleItem));
         
-        Menu modelsMenu = new Menu("Models");
+        Menu modelsMenu = new Menu("Select Model");
         populateModelsMenu(modelsMenu);
+        
+        MenuItem editModelsItem = new MenuItem("Edit Models");
+        editModelsItem.addActionListener(e -> openModelsConfig());
         
         popup.add(toggleItem);
         popup.add(modelsMenu);
+        popup.add(editModelsItem);
         popup.addSeparator();
         popup.add(createExitItem());
         
@@ -114,11 +128,29 @@ public class Instyper {
     
     static void initializeSpeechRecognition() throws IOException {
         Path modelPath = resolveModelPath(currentModel);
-        if(!Files.exists(modelPath)) downloadModel(currentModel);
+        if(!Files.exists(modelPath)) {
+            updateModelLoadingStatus("Downloading model...");
+            downloadModel(currentModel);
+        }
         
-        Model model;
+        updateModelLoadingStatus("Loading model...");
         try {
-            model = new Model(modelPath.toString());
+            // Get the backend from models.json
+            String backend = getModelBackend(currentModel);
+            
+            // Initialize based on backend
+            switch (backend.toLowerCase()) {
+                case "vosk":
+                    currentModelInstance = new Model(modelPath.toString());
+                    recognizer = new Recognizer(currentModelInstance, AUDIO_RATE);
+                    break;
+                case "whisper":
+                case "coqui":
+                    // Add support for other backends here
+                    throw new IOException("Backend " + backend + " is not yet supported");
+                default:
+                    throw new IOException("Unknown backend: " + backend);
+            }
         } catch (IOException e) {
             System.err.println("Failed to load model at " + modelPath + ": " + e.getMessage());
             if (!DEFAULT_MODEL.equals(currentModel)) {
@@ -126,13 +158,17 @@ public class Instyper {
                 currentModel = DEFAULT_MODEL;
                 prefs.put("model", currentModel);
                 modelPath = resolveModelPath(currentModel);
-                if (!Files.exists(modelPath)) downloadModel(currentModel);
-                model = new Model(modelPath.toString());
+                if (!Files.exists(modelPath)) {
+                    updateModelLoadingStatus("Downloading default model...");
+                    downloadModel(currentModel);
+                }
+                updateModelLoadingStatus("Loading default model...");
+                currentModelInstance = new Model(modelPath.toString());
+                recognizer = new Recognizer(currentModelInstance, AUDIO_RATE);
             } else {
                 throw e;
             }
         }
-        recognizer = new Recognizer(model, AUDIO_RATE);
     }
     
     static void registerGlobalHotkey() {
@@ -227,10 +263,15 @@ public class Instyper {
     }
     
     static void populateModelsMenu(Menu menu) {
-        modelOptions.forEach((name, model) -> {
-            MenuItem item = new MenuItem(name);
-            item.addActionListener(e -> setModel(model));
-            item.setEnabled(!model.equals(currentModel));
+        menu.removeAll(); // Clear existing items
+        modelOptions.forEach((displayName, modelId) -> {
+            MenuItem item = new MenuItem(displayName);
+            item.addActionListener(e -> setModel(modelId));
+            // Add check mark to currently selected model
+            if (modelId.equals(currentModel)) {
+                item.setLabel("✓ " + displayName);
+                item.setEnabled(false); // Optionally disable the selected item
+            }
             menu.add(item);
         });
     }
@@ -238,28 +279,136 @@ public class Instyper {
     static void setModel(String model) {
         prefs.put("model", model);
         currentModel = model;
-        try {
-            initializeSpeechRecognition();
-        } catch (IOException e) {
-            showError("Model Error", e.getMessage());
+        
+        // Show loading dialog
+        showModelLoadingDialog("Loading new model...");
+        
+        // Load model in virtual thread
+        Thread.startVirtualThread(() -> {
+            try {
+                // Cleanup previous model
+                cleanupModel();
+                
+                // Initialize new model
+                initializeSpeechRecognition();
+                
+                // Update UI on EDT
+                SwingUtilities.invokeLater(() -> {
+                    hideModelLoadingDialog();
+                    trayIcon.displayMessage(APP_NAME, "Model switched successfully", TrayIcon.MessageType.INFO);
+                    // Update the models menu to show new selection
+                    PopupMenu popup = trayIcon.getPopupMenu();
+                    for (int i = 0; i < popup.getItemCount(); i++) {
+                        if (popup.getItem(i) instanceof Menu && popup.getItem(i).getLabel().equals("Select Model")) {
+                            populateModelsMenu((Menu) popup.getItem(i));
+                            break;
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> {
+                    hideModelLoadingDialog();
+                    showError("Model Error", e.getMessage());
+                });
+            }
+        });
+    }
+    
+    static void cleanupModel() {
+        if (recognizer != null) {
+            recognizer.close();
+            recognizer = null;
+        }
+        if (currentModelInstance != null) {
+            currentModelInstance.close();
+            currentModelInstance = null;
+        }
+        if (watchService != null) {
+            try {
+                watchService.close();
+            } catch (IOException e) {
+                System.err.println("Error closing watch service: " + e.getMessage());
+            }
+        }
+        // Force garbage collection
+        System.gc();
+    }
+    
+    static void showModelLoadingDialog(String message) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame();
+            modelLoadingDialog = new JDialog(frame, "Loading Model", true);
+            modelProgressBar = new JProgressBar();
+            modelProgressBar.setIndeterminate(true);
+            modelStatusLabel = new JLabel(message);
+            
+            JPanel panel = new JPanel(new BorderLayout(10, 10));
+            panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            panel.add(modelStatusLabel, BorderLayout.NORTH);
+            panel.add(modelProgressBar, BorderLayout.CENTER);
+            
+            modelLoadingDialog.add(panel);
+            modelLoadingDialog.setSize(300, 100);
+            modelLoadingDialog.setLocationRelativeTo(null);
+            modelLoadingDialog.setVisible(true);
+        });
+    }
+    
+    static void hideModelLoadingDialog() {
+        if (modelLoadingDialog != null) {
+            modelLoadingDialog.dispose();
+            modelLoadingDialog = null;
+        }
+    }
+    
+    static void updateModelLoadingStatus(String message) {
+        if (modelStatusLabel != null) {
+            SwingUtilities.invokeLater(() -> modelStatusLabel.setText(message));
         }
     }
     
     static void loadModelOptions() {
+        modelOptions.clear();
+        
+        try {
+            JSONObject config = new JSONObject(Files.readString(USER_DIR.resolve("models.json")));
+            JSONArray models = config.getJSONArray("models");
+            
+            for(int i=0; i<models.length(); i++) {
+                JSONObject model = models.getJSONObject(i);
+                String backend = model.getString("backend");
+                String name = model.getString("name");
+                String modelId = model.getString("model");
+                
+                // Simple format: backend + name
+                String displayName = backend + ": " + name;
+                modelOptions.put(displayName, modelId);
+            }
+            
+            // If no models were loaded, add default Vosk model
+            if (modelOptions.isEmpty()) {
+                modelOptions.put("vosk: English", "vosk-model-small-en-us-0.15");
+            }
+        } catch (IOException e) {
+            // Only add default model if file doesn't exist or is invalid
+            modelOptions.put("vosk: English", "vosk-model-small-en-us-0.15");
+        }
+    }
+    
+    static String getModelBackend(String modelId) throws IOException {
         try {
             JSONObject config = new JSONObject(Files.readString(USER_DIR.resolve("models.json")));
             JSONArray models = config.getJSONArray("models");
             for(int i=0; i<models.length(); i++) {
                 JSONObject model = models.getJSONObject(i);
-                if(model.getString("backend").equals("vosk")) {
-                    modelOptions.put(model.getString("name"), model.getString("model"));
+                if(model.getString("model").equals(modelId)) {
+                    return model.getString("backend");
                 }
             }
-        } catch (IOException e) {
-            // Default models
-            modelOptions.put("English Small", "vosk-model-small-en-us-0.15");
-            modelOptions.put("German", "vosk-model-small-de-zamia-0.3");
+        } catch (Exception e) {
+            System.err.println("Error reading models.json: " + e.getMessage());
         }
+        return "vosk"; // Default to vosk if not found
     }
     
     static Image createTrayIconImage() {
@@ -274,10 +423,40 @@ public class Instyper {
     static MenuItem createExitItem() {
         MenuItem exit = new MenuItem("Exit");
         exit.addActionListener(e -> {
-            SystemTray.getSystemTray().remove(trayIcon);
-            System.exit(0);
+            try {
+                // Stop listening if active
+                if (isListening.get()) {
+                    stopListening();
+                }
+                
+                // Cleanup model resources
+                cleanupModel();
+                
+                // Remove tray icon
+                SystemTray.getSystemTray().remove(trayIcon);
+                
+                // Exit the application
+                System.exit(0);
+            } catch (Exception ex) {
+                System.err.println("Error during shutdown: " + ex.getMessage());
+                System.exit(1);
+            }
         });
         return exit;
+    }
+    
+    // Add shutdown hook to ensure cleanup even if process is terminated
+    static {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                if (isListening.get()) {
+                    stopListening();
+                }
+                cleanupModel();
+            } catch (Exception e) {
+                System.err.println("Error during shutdown hook: " + e.getMessage());
+            }
+        }));
     }
     
     static void showLoadingDialog() {
@@ -315,5 +494,165 @@ public class Instyper {
         
         try { Files.createFile(FIRST_RUN_FLAG); } 
         catch (IOException e) { /* Ignore */ }
+    }
+    
+    static void openModelsConfig() {
+        try {
+            Path modelsConfig = USER_DIR.resolve("models.json");
+            if (!Files.exists(modelsConfig)) {
+                // Create default models.json if it doesn't exist
+                JSONObject config = new JSONObject();
+                JSONArray models = new JSONArray();
+                
+                // Add only the default Vosk model
+                JSONObject defaultModel = new JSONObject();
+                defaultModel.put("name", "English");
+                defaultModel.put("model", "vosk-model-small-en-us-0.15");
+                defaultModel.put("backend", "vosk");
+                models.put(defaultModel);
+                
+                config.put("models", models);
+                Files.writeString(modelsConfig, config.toString(2));
+            }
+            
+            // Open file with OS-specific default text editor
+            String os = System.getProperty("os.name").toLowerCase();
+            ProcessBuilder pb;
+            
+            if (os.contains("win")) {
+                pb = new ProcessBuilder("notepad", modelsConfig.toString());
+            } else if (os.contains("mac")) {
+                pb = new ProcessBuilder("open", modelsConfig.toString());
+            } else {
+                // Linux and other Unix-like systems
+                pb = new ProcessBuilder("xdg-open", modelsConfig.toString());
+            }
+            
+            pb.start();
+            
+            // Show message about reloading
+            trayIcon.displayMessage(APP_NAME, 
+                "After editing models.json, restart the application to apply changes.", 
+                TrayIcon.MessageType.INFO);
+                
+        } catch (Exception e) {
+            showError("Error", "Failed to open models configuration: " + e.getMessage());
+        }
+    }
+    
+    static void startModelsWatcher() throws IOException {
+        watchService = FileSystems.getDefault().newWatchService();
+        Path modelsConfig = USER_DIR.resolve("models.json");
+        watchKey = modelsConfig.getParent().register(watchService, 
+            StandardWatchEventKinds.ENTRY_MODIFY);
+            
+        // Store initial models
+        updateCurrentModels();
+        
+        // Start watching in a virtual thread
+        Thread.startVirtualThread(() -> {
+            try {
+                while (true) {
+                    WatchKey key = watchService.take();
+                    for (WatchEvent<?> event : key.pollEvents()) {
+                        if (event.context().toString().equals("models.json")) {
+                            handleModelsConfigChange();
+                        }
+                    }
+                    key.reset();
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+    }
+    
+    static void updateCurrentModels() {
+        try {
+            JSONObject config = new JSONObject(Files.readString(USER_DIR.resolve("models.json")));
+            JSONArray models = config.getJSONArray("models");
+            currentModels.clear();
+            for (int i = 0; i < models.length(); i++) {
+                JSONObject model = models.getJSONObject(i);
+                if (model.getString("backend").equals("vosk")) {
+                    currentModels.add(model.getString("model"));
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error reading models.json: " + e.getMessage());
+        }
+    }
+    
+    static void handleModelsConfigChange() {
+        try {
+            // Wait a bit to ensure file is completely written
+            Thread.sleep(100);
+            
+            JSONObject config = new JSONObject(Files.readString(USER_DIR.resolve("models.json")));
+            JSONArray models = config.getJSONArray("models");
+            Set<String> newModels = new HashSet<>();
+            
+            // Get new model list
+            for (int i = 0; i < models.length(); i++) {
+                JSONObject model = models.getJSONObject(i);
+                if (model.getString("backend").equals("vosk")) {
+                    newModels.add(model.getString("model"));
+                }
+            }
+            
+            // Find removed models
+            Set<String> removedModels = new HashSet<>(currentModels);
+            removedModels.removeAll(newModels);
+            
+            // Handle removed models
+            for (String model : removedModels) {
+                handleRemovedModel(model);
+            }
+            
+            // Update current models
+            currentModels = newModels;
+            
+            // Reload model options
+            loadModelOptions();
+            
+        } catch (Exception e) {
+            System.err.println("Error handling models.json change: " + e.getMessage());
+        }
+    }
+    
+    static void handleRemovedModel(String modelName) {
+        SwingUtilities.invokeLater(() -> {
+            int response = JOptionPane.showConfirmDialog(null,
+                "Model '" + modelName + "' has been removed from the configuration.\n" +
+                "Would you like to delete the model files as well?",
+                "Remove Model Files",
+                JOptionPane.YES_NO_OPTION);
+                
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    Path modelPath = resolveModelPath(modelName);
+                    if (Files.exists(modelPath)) {
+                        deleteDirectory(modelPath);
+                        trayIcon.displayMessage(APP_NAME,
+                            "Model files for '" + modelName + "' have been removed.",
+                            TrayIcon.MessageType.INFO);
+                    }
+                } catch (IOException e) {
+                    showError("Error", "Failed to remove model files: " + e.getMessage());
+                }
+            }
+        });
+    }
+    
+    static void deleteDirectory(Path path) throws IOException {
+        Files.walk(path)
+            .sorted(Comparator.reverseOrder())
+            .forEach(p -> {
+                try {
+                    Files.delete(p);
+                } catch (IOException e) {
+                    System.err.println("Error deleting " + p + ": " + e.getMessage());
+                }
+            });
     }
 }
