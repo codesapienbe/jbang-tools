@@ -7,6 +7,8 @@
 //DEPS org.apache.poi:poi-ooxml:5.2.3
 //DEPS org.commonmark:commonmark:0.21.0
 //DEPS org.apache.logging.log4j:log4j-core:2.22.1
+//DEPS com.microsoft.playwright:playwright:1.52.0
+
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -54,6 +56,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.awt.datatransfer.StringSelection;
 import java.nio.file.attribute.FileTime;
+
+import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.BrowserType;
 
 @Command(name = "jobops", mixinStandardHelpOptions = true, version = "1.0",
          description = "AI Motivation Letter Daemon")
@@ -1220,12 +1227,19 @@ public class JobOps implements Callable<Integer> {
 
     private JobData scrapeJobDescription(String url, String company, String jobTitle) throws Exception {
         try {
-            Document doc = Jsoup.connect(url)
-                .userAgent("JobOps/1.0")
-                .timeout(30000)
-                .maxBodySize(0)
-                .get();
-            
+            // Use Playwright for headless browser automation without external Chrome install
+            String html;
+            try (Playwright playwright = Playwright.create()) {
+                Browser browser = playwright.chromium()
+                                      .launch(new BrowserType.LaunchOptions().setHeadless(true));
+                Page page = browser.newPage();
+                page.navigate(url);
+                html = page.content();
+                browser.close();
+            }
+            // Parse the loaded HTML with Jsoup for further processing
+            Document doc = Jsoup.parse(html);
+
             // Extract company and title if not provided
             if (company == null || company.isEmpty()) {
                 company = extractCompanyFromHtml(doc);

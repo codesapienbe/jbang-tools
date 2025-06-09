@@ -1,0 +1,144 @@
+{
+  "aliases": {
+    "jobops": {
+      "description": "AI motivation letter daemon with web crawling",
+      "uri": "jobops.java"
+    },
+    "instyper": {
+      "description": "Ultra-low latency speech-to-text conversion",
+      "uri": "instyper.java"
+    },
+    "offlan": {
+      "description": "Completely offline translator (90+ languages)",
+      "uri": "offlan.java"
+    },
+    "inspeak": {
+      "description": "Instant text-to-speech with file monitoring",
+      "uri": "inspeak.java"
+    },
+    "qproj": {
+      "description": "Project generator with 100k+ templates",
+      "uri": "qproj.java"
+    },
+    "pertun": {
+      "description": "Performance tuning and OS optimization",
+      "uri": "pertun.java"
+    },
+    "sysmon": {
+      "description": "Comprehensive system monitoring with AI predictions",
+      "uri": "sysmon.java"
+    },
+    "netwatch": {
+      "description": "Network traffic monitoring with threat detection",
+      "uri": "netwatch.java"
+    },
+    "procman": {
+      "description": "Advanced process manager with AI recommendations",
+      "uri": "procman.java"
+    },
+    "diskman": {
+      "description": "Intelligent disk analyzer with smart cleanup",
+      "uri": "diskman.java"
+    },
+    "powmon": {
+      "description": "Battery and power management with learning optimization",
+      "uri": "powmon.java"
+    },
+    "lazyme": {
+      "description": "Cross-platform face recognition authentication",
+      "uri": "lazyme.java"
+    },
+    "safeclip": {
+      "description": "AI-powered clipboard security scanner",
+      "uri": "safeclip.java"
+    },
+    "mahrem": {
+      "description": "Universal end-to-end message encryption",
+      "uri": "mahrem.java"
+    },
+    "vaultray": {
+      "description": "Lightweight password manager with tray integration",
+      "uri": "vaultray.java"
+    },
+    "screengrab": {
+      "description": "Professional screen capture with AI annotation",
+      "uri": "screengrab.java"
+    },
+    "medilook": {
+      "description": "AI-powered video content search",
+      "uri": "medilook.java"
+    },
+    "newlook": {
+      "description": "Real-time appearance modification with computer vision",
+      "uri": "newlook.java"
+    },
+    "audioctl": {
+      "description": "Advanced audio control with device switching",
+      "uri": "audioctl.java"
+    },
+    "clipstack": {
+      "description": "Advanced clipboard manager with AI categorization",
+      "uri": "clipstack.java"
+    },
+    "quickfile": {
+      "description": "Lightning-fast file search with learning algorithms",
+      "uri": "quickfile.java"
+    },
+    "filewatch": {
+      "description": "Real-time file system monitoring with anomaly detection",
+      "uri": "filewatch.java"
+    },
+    "syncmate": {
+      "description": "Intelligent file synchronization with smart conflict resolution",
+      "uri": "syncmate.java"
+    },
+    "winman": {
+      "description": "Advanced window manager with learning-based layouts",
+      "uri": "winman.java"
+    },
+    "trayorg": {
+      "description": "System tray organizer with AI importance ranking",
+      "uri": "trayorg.java"
+    },
+    "displayctl": {
+      "description": "Advanced display control with adaptive ML settings",
+      "uri": "displayctl.java"
+    },
+    "quickset": {
+      "description": "Rapid system settings access with contextual suggestions",
+      "uri": "quickset.java"
+    },
+    "servicectl": {
+      "description": "System service manager with predictive failure detection",
+      "uri": "servicectl.java"
+    },
+    "voicebytes": {
+      "description": "Audio analysis with real-time speaker isolation",
+      "uri": "voicebytes.java"
+    },
+    "netguard": {
+      "description": "Network security monitor with ML threat detection",
+      "uri": "netguard.java"
+    },
+    "vpnmon": {
+      "description": "VPN connection monitor with intelligent server selection",
+      "uri": "vpnmon.java"
+    },
+    "pingmon": {
+      "description": "Network connectivity monitor with predictive issue detection",
+      "uri": "pingmon.java"
+    },
+    "facebytes": {
+      "description": "Event photo management with privacy features",
+      "uri": "facebytes.java"
+    },
+    "visiplay": {
+      "description": "Touchless gaming platform using hand-tracking",
+      "uri": "visiplay.java"
+    },
+    "feedme": {
+      "description": "AI-powered food inspection and nutrition analysis",
+      "uri": "feedme.java"
+    }
+  }
+} 
