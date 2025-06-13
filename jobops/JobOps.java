@@ -391,7 +391,7 @@ public class JobOps implements Callable<Integer> {
             } catch (Exception ex) {
                 System.err.println("Error during shutdown: " + ex.getMessage());
             } finally {
-                System.exit(0);
+            System.exit(0);
             }
         });
         popup.add(exitItem);
@@ -469,16 +469,16 @@ public class JobOps implements Callable<Integer> {
         
         // Monitor resumes directory only if no resume path is provided
         scheduler.scheduleAtFixedRate(() -> {
-                try {
+            try {
                 if (resumePath == null) {
-                    checkForNewResumes();
+                checkForNewResumes();
                 } else {
                     checkResumeFile();
                 }
                 state.cleanupOldEntries();
-                } catch (Exception e) {
+            } catch (Exception e) {
                     logger.error("Error checking resumes: " + e.getMessage(), e);
-                }
+            }
         }, 0, 30, TimeUnit.SECONDS);
 
         // Start clipboard monitoring
@@ -652,7 +652,7 @@ public class JobOps implements Callable<Integer> {
                                 deleteDirectory(tempDir);
                             }
                             
-                        } catch (Exception e) {
+        } catch (Exception e) {
                             logger.error("Error processing clipboard URL: " + e.getMessage(), e);
                             showNotification("Error", 
                                 "Failed to process job posting URL: " + e.getMessage(), 
@@ -1132,18 +1132,18 @@ public class JobOps implements Callable<Integer> {
 
         try {
             progressDialog.updateProgress("Scraping job description...", 20);
-            JobData jobData = scrapeJobDescription(jobUrl, company, jobTitle);
+        JobData jobData = scrapeJobDescription(jobUrl, company, jobTitle);
             
             progressDialog.updateProgress("Generating letter content...", 50);
-            String letterContent = generateLetterWithLLM(jobData, resumeContent, language);
-            
+        String letterContent = generateLetterWithLLM(jobData, resumeContent, language);
+        
             progressDialog.updateProgress("Saving letter...", 80);
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
             String baseDirName = String.format("%s_%s_%s",
-                sanitizeFilename(jobData.company),
-                sanitizeFilename(jobData.title),
-                timestamp);
-            
+            sanitizeFilename(jobData.company),
+            sanitizeFilename(jobData.title),
+            timestamp);
+        
             // Create temporary directory for files
             Path tempDir = Files.createTempDirectory("jobops_");
             try {
@@ -1194,10 +1194,10 @@ public class JobOps implements Callable<Integer> {
             
             progressDialog.updateProgress("Letter generated successfully!", 100);
             progressDialog.dispose();
-            
-            showNotification("Letter Generated", 
-                "Motivation letter created for " + jobData.company, 
-                TrayIcon.MessageType.INFO);
+        
+        showNotification("Letter Generated", 
+            "Motivation letter created for " + jobData.company, 
+            TrayIcon.MessageType.INFO);
             } finally {
                 // Clean up temporary directory
                 deleteDirectory(tempDir);
@@ -1544,10 +1544,10 @@ public class JobOps implements Callable<Integer> {
 
     private String callOllama(String prompt) throws Exception {
         try {
-            HttpRequest request = HttpRequest.newBuilder()
+        HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(currentBackend.baseUrl + "/api/generate"))
                 .timeout(Duration.ofSeconds(60))
-                .header("Content-Type", "application/json")
+            .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(String.format("""
                     {
                         "model": "%s",
@@ -1555,10 +1555,10 @@ public class JobOps implements Callable<Integer> {
                         "stream": false
                     }
                     """, currentBackend.model, mapper.writeValueAsString(prompt))))
-                .build();
-
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() != 200) {
+            .build();
+        
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() != 200) {
                 throw new IOException("Ollama API error: " + response.statusCode());
             }
 
@@ -1587,7 +1587,7 @@ public class JobOps implements Callable<Integer> {
                 }
                 """, currentBackend.model, mapper.writeValueAsString(prompt))))
             .build();
-
+        
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() != 200) {
             throw new IOException("OpenAI API error: " + response.statusCode());
@@ -1614,7 +1614,7 @@ public class JobOps implements Callable<Integer> {
                 }
                 """, currentBackend.model, mapper.writeValueAsString(prompt))))
             .build();
-
+        
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() != 200) {
             throw new IOException("Groq API error: " + response.statusCode());

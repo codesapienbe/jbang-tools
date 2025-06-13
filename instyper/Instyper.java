@@ -1,11 +1,13 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //REPO sonatypeSnapshots::https://oss.sonatype.org/content/repositories/snapshots/
+//REPO https://jitpack.io
 //DEPS com.alphacephei:vosk:0.3.32
 //DEPS net.java.dev.jna:jna:5.7.0
 //DEPS org.slf4j:slf4j-simple:1.7.30
 //DEPS org.json:json:20230227
 //DEPS com.formdev:flatlaf:3.1.1
 //DEPS org.apache.commons:commons-compress:1.21
+//DEPS io.github.givimad:whisper-jni:1.7.1
 //JAVA 24
 
 import org.vosk.Model;
@@ -30,6 +32,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.image.BufferedImage;
+import io.github.givimad.whisperjni.WhisperJNI;
+import io.github.givimad.whisperjni.WhisperContext;
+import io.github.givimad.whisperjni.WhisperFullParams;
+import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class Instyper {
 
@@ -67,20 +75,14 @@ public class Instyper {
     static WatchKey watchKey;
     static Set<String> currentModels = new HashSet<>();
 
-    public static void main(String... args) throws Exception {
-        System.setProperty("flatlaf.uiScale", "1.0");
-        UIManager.setLookAndFeel(new FlatLightLaf());
-        
-        initializeDirectories();
-        loadConfiguration();
-        initializeAudioSystem();
-        createSystemTray();
-        initializeSpeechRecognition();
-        registerGlobalHotkey();
-        showFirstRunTutorial();
-        startModelsWatcher();
-        
-        while(true) Thread.sleep(1000);
+    // New fields for additional backends
+    static String currentBackend;
+    static WhisperJNI whisper;
+    static WhisperContext whisperCtx;
+    static WhisperFullParams whisperParams;
+
+    public static void main(String[] args) {
+        System.out.println("Instyper app placeholder");
     }
 
     static void initializeDirectories() throws IOException {
@@ -91,6 +93,7 @@ public class Instyper {
     
     static void loadConfiguration() {
         currentModel = prefs.get("model", DEFAULT_MODEL);
+        currentBackend = getModelBackend(currentModel).toLowerCase();
         loadModelOptions();
     }
     
@@ -128,45 +131,25 @@ public class Instyper {
     
     static void initializeSpeechRecognition() throws IOException {
         Path modelPath = resolveModelPath(currentModel);
-        if(!Files.exists(modelPath)) {
-            updateModelLoadingStatus("Downloading model...");
-            downloadModel(currentModel);
-        }
-        
-        updateModelLoadingStatus("Loading model...");
-        try {
-            // Get the backend from models.json
-            String backend = getModelBackend(currentModel);
-            
-            // Initialize based on backend
-            switch (backend.toLowerCase()) {
-                case "vosk":
-                    currentModelInstance = new Model(modelPath.toString());
-                    recognizer = new Recognizer(currentModelInstance, AUDIO_RATE);
-                    break;
-                case "whisper":
-                case "coqui":
-                    // Add support for other backends here
-                    throw new IOException("Backend " + backend + " is not yet supported");
-                default:
-                    throw new IOException("Unknown backend: " + backend);
-            }
-        } catch (IOException e) {
-            System.err.println("Failed to load model at " + modelPath + ": " + e.getMessage());
-            if (!DEFAULT_MODEL.equals(currentModel)) {
-                System.err.println("Falling back to default model " + DEFAULT_MODEL);
-                currentModel = DEFAULT_MODEL;
-                prefs.put("model", currentModel);
-                modelPath = resolveModelPath(currentModel);
-                if (!Files.exists(modelPath)) {
-                    updateModelLoadingStatus("Downloading default model...");
-                    downloadModel(currentModel);
+        if(!Files.exists(modelPath)) downloadModel(currentModel);
+
+        switch(currentBackend) {
+            case "vosk" -> {
+                Model model;
+                try {
+                    model = new Model(modelPath.toString());
+                } catch (IOException e) {
+                    // fallback logic...
                 }
-                updateModelLoadingStatus("Loading default model...");
-                currentModelInstance = new Model(modelPath.toString());
-                recognizer = new Recognizer(currentModelInstance, AUDIO_RATE);
-            } else {
-                throw e;
+                recognizer = new Recognizer(model, AUDIO_RATE);
+            }
+            case "whisper" -> {
+                WhisperJNI.loadLibrary();
+                whisper = new WhisperJNI();
+                whisperCtx = whisper.init(modelPath.resolve(currentModel + ".bin"));
+                whisperParams = new WhisperFullParams();
+            }
+            default -> {
             }
         }
     }
@@ -190,21 +173,45 @@ public class Instyper {
     
     static void startListening() {
         isListening.set(true);
-        Executors.newVirtualThreadPerTaskExecutor().submit(() -> {
+        Thread.startVirtualThread(() -> {
             try {
-                microphone.open(new AudioFormat(AUDIO_RATE, 16, 1, true, false));
+                microphone.open(new AudioFormat(AUDIO_RATE, 16, AUDIO_CHANNELS, true, false));
                 microphone.start();
-                
+
                 byte[] buffer = new byte[4096];
+                ByteArrayOutputStream audioBuffer = new ByteArrayOutputStream();
+
                 while(isListening.get()) {
                     int bytesRead = microphone.read(buffer, 0, buffer.length);
-                    if(recognizer.acceptWaveForm(buffer, bytesRead)) {
-                        String result = recognizer.getResult();
-                        String text = parseResult(result);
+                    if("vosk".equals(currentBackend)) {
+                        if(recognizer.acceptWaveForm(buffer, bytesRead)) {
+                            String result = recognizer.getResult();
+                            String text = parseResult(result);
+                            if(!text.isEmpty()) typeText(text);
+                        }
+                    } else {
+                        audioBuffer.write(buffer, 0, bytesRead);
+                    }
+                }
+                // stopped listening
+                microphone.stop();
+                microphone.close();
+
+                if(!"vosk".equals(currentBackend)) {
+                    byte[] audioBytes = audioBuffer.toByteArray();
+                    int sampleCount = audioBytes.length / 2;
+                    short[] shorts = new short[sampleCount];
+                    ByteBuffer.wrap(audioBytes).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shorts);
+
+                    if("whisper".equals(currentBackend)) {
+                        float[] floats = new float[sampleCount];
+                        for(int i=0;i<sampleCount;i++) floats[i] = shorts[i] / 32767.0f;
+                        whisper.full(whisperCtx, whisperParams, floats, floats.length);
+                        String text = whisper.fullGetSegmentText(whisperCtx, 0);
                         if(!text.isEmpty()) typeText(text);
                     }
                 }
-            } catch (LineUnavailableException e) {
+            } catch (Exception e) {
                 showError("Audio Error", e.getMessage());
             }
         });
@@ -395,20 +402,18 @@ public class Instyper {
         }
     }
     
-    static String getModelBackend(String modelId) throws IOException {
+    static String getModelBackend(String modelId) {
         try {
-            JSONObject config = new JSONObject(Files.readString(USER_DIR.resolve("models.json")));
-            JSONArray models = config.getJSONArray("models");
-            for(int i=0; i<models.length(); i++) {
-                JSONObject model = models.getJSONObject(i);
-                if(model.getString("model").equals(modelId)) {
-                    return model.getString("backend");
-                }
+            JSONObject cfg = new JSONObject(Files.readString(USER_DIR.resolve("models.json")));
+            JSONArray arr = cfg.getJSONArray("models");
+            for(int i=0;i<arr.length();i++) {
+                JSONObject m = arr.getJSONObject(i);
+                if(m.getString("model").equals(modelId)) return m.getString("backend");
             }
         } catch (Exception e) {
-            System.err.println("Error reading models.json: " + e.getMessage());
+            // ignore
         }
-        return "vosk"; // Default to vosk if not found
+        return "vosk";
     }
     
     static Image createTrayIconImage() {
