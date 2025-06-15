@@ -88,13 +88,10 @@ public class JobOps implements Callable<Integer> {
     @Option(names = {"--groq-key"}, description = "Groq API Key")
     private String groqKey;
 
-    @Option(names = {"-w", "--watch"}, description = "Directory to watch for job applications", defaultValue = ".")
-    private Path watchDir;
-
     @Option(names = {"--resume"}, description = "Path to resume file (PDF, DOCX, or MD)", defaultValue = "resume.md")
     private Path resumePath;
 
-    @Option(names = {"--export"}, description = "Directory to export generated documents", defaultValue = ".")
+    @Option(names = {"--export"}, description = "Directory to export generated documents")
     private Path exportDir;
     
     private static final Path USER_HOME = Paths.get(System.getProperty("user.home"));
@@ -184,6 +181,9 @@ public class JobOps implements Callable<Integer> {
     private static final String CLIPBOARD_MONITOR_THREAD = "ClipboardMonitor";
     private Clipboard clipboard;
     private String lastClipboardContent = "";
+
+    // Watch directory is fixed to current working directory (no longer user-configurable)
+    private final Path watchDir = Paths.get(".");
 
     public JobOps() {
         // No changes to constructor
@@ -277,6 +277,19 @@ public class JobOps implements Callable<Integer> {
             return 1;
         }
         
+        // Prompt for export directory if not provided
+        if (exportDir == null) {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Select Export Directory");
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int returnVal = chooser.showOpenDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                exportDir = chooser.getSelectedFile().toPath();
+            } else {
+                System.err.println("Export directory is required.");
+                return 1;
+            }
+        }
         // Validate export directory
         if (!Files.exists(exportDir)) {
             Files.createDirectories(exportDir);
@@ -286,26 +299,32 @@ public class JobOps implements Callable<Integer> {
             return 1;
         }
         
-        // Validate resume file if provided
-        if (resumePath != null) {
-            if (!Files.exists(resumePath)) {
-                System.err.println("Resume file not found: " + resumePath);
-                return 1;
-            }
-            String fileName = resumePath.getFileName().toString().toLowerCase();
-            if (!fileName.endsWith(".pdf") && !fileName.endsWith(".docx") && !fileName.endsWith(".md")) {
-                System.err.println("Resume file must be PDF, DOCX, or MD format: " + resumePath);
-                return 1;
-            }
-            // Load resume content immediately
-            String content = readFileContent(resumePath);
-            if (content != null && !content.trim().isEmpty()) {
-                state.setLastResume(content, resumePath, Files.getLastModifiedTime(resumePath));
-                logger.info("Resume loaded successfully from: " + resumePath);
+        // Prompt for resume file if not provided or file not found
+        if (resumePath == null || !Files.exists(resumePath)) {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Select Resume File");
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int returnVal = chooser.showOpenDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                resumePath = chooser.getSelectedFile().toPath();
             } else {
-                System.err.println("Could not read resume content from: " + resumePath);
+                System.err.println("Resume file is required.");
                 return 1;
             }
+        }
+        // Validate resume file type and load content
+        String fileName = resumePath.getFileName().toString().toLowerCase();
+        if (!fileName.endsWith(".pdf") && !fileName.endsWith(".docx") && !fileName.endsWith(".md")) {
+            System.err.println("Resume file must be PDF, DOCX, or MD format: " + resumePath);
+            return 1;
+        }
+        String content = readFileContent(resumePath);
+        if (content != null && !content.trim().isEmpty()) {
+            state.setLastResume(content, resumePath, Files.getLastModifiedTime(resumePath));
+            logger.info("Resume loaded successfully from: " + resumePath);
+        } else {
+            System.err.println("Could not read resume content from: " + resumePath);
+            return 1;
         }
         
         // Load API keys from .env file first
@@ -317,18 +336,36 @@ public class JobOps implements Callable<Integer> {
         
         // Validate API keys for commercial backends
         if ("openai".equals(backend)) {
+            // Prompt user for missing OpenAI key via form
             if (openaiKey == null || openaiKey.trim().isEmpty()) {
-                System.err.println("OpenAI API key required. Use --openai-key parameter or set OPENAI_API_KEY in .env file");
-            return 1;
-        }
-            System.out.println("OpenAI API key found");
+                openaiKey = JOptionPane.showInputDialog(
+                    null,
+                    "Enter OpenAI API Key:",
+                    "OpenAI Key Required",
+                    JOptionPane.PLAIN_MESSAGE
+                );
+                if (openaiKey == null || openaiKey.trim().isEmpty()) {
+                    System.err.println("OpenAI API key is required.");
+                    return 1;
+                }
+            }
+            System.out.println("OpenAI API key set");
         }
         if ("groq".equals(backend)) {
+            // Prompt user for missing Groq key via form
             if (groqKey == null || groqKey.trim().isEmpty()) {
-                System.err.println("Groq API key required. Use --groq-key parameter or set GROQ_API_KEY in .env file");
-            return 1;
+                groqKey = JOptionPane.showInputDialog(
+                    null,
+                    "Enter Groq API Key:",
+                    "Groq Key Required",
+                    JOptionPane.PLAIN_MESSAGE
+                );
+                if (groqKey == null || groqKey.trim().isEmpty()) {
+                    System.err.println("Groq API key is required.");
+                    return 1;
+                }
             }
-            System.out.println("Groq API key found");
+            System.out.println("Groq API key set");
         }
         
         SwingUtilities.invokeLater(() -> {
