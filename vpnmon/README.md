@@ -41,9 +41,11 @@ jbang vpnmon/Vpnmon.java --select --criteria latency
 ## Ecosystem Integration
 
 Vpnmon can be used with:
+
 - `netwatch` for VPN traffic monitoring
 - `pingmon` for comparing server response times
 - `jobops` for ensuring secure connections before job submissions
 
 ## More info
-See the main [jbang-catalog.json](../jbang-catalog.json) for all available tools. 
+
+See the main [jbang-catalog.json](../jbang-catalog.json) for all available tools.

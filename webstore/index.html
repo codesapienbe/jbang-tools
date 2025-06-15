@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBang-Tools: The Ultimate Cross-Platform Java Application Ecosystem</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">JBang-Tools: The Ultimate Cross-Platform Java Application Ecosystem</h1>
+            <p class="hero-subtitle">35 Zero-Dependency Tools Built with Java 24, Virtual Threads & AI Integration</p>
+            <div class="value-props">
+                <span class="value-prop">Install Once, Run Everywhere</span>
+                <span class="value-prop">Zero Dependencies</span>
+                <span class="value-prop">Enterprise Performance</span>
+            </div>
+            <div class="hero-actions">
+                <button class="btn btn--primary btn--lg" onclick="scrollToSection('installation')">Quick Start</button>
+                <button class="btn btn--outline btn--lg" onclick="scrollToSection('categories')">Browse Tools</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="tech-stack">
+        <div class="container">
+            <h2>Built with Modern Java Technology</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>Java 24</h3>
+                    <p>Latest Java features for optimal performance</p>
+                </div>
+                <div class="tech-card">
+                    <h3>Virtual Threads</h3>
+                    <p>70x speed improvements with lightweight concurrency</p>
+                </div>
+                <div class="tech-card">
+                    <h3>JBang</h3>
+                    <p>Zero-dependency installation and execution</p>
+                </div>
+                <div class="tech-card">
+                    <h3>AI Integration</h3>
+                    <p>Ollama, OpenAI, Groq & Perplexity backends</p>
+                </div>
+            </div>
+            <div class="platform-badges">
+                <span class="badge">Windows</span>
+                <span class="badge">macOS</span>
+                <span class="badge">Linux</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tool Categories -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2>35 Professional Tools Across 8 Categories</h2>
+            
+            <!-- AI & Productivity -->
+            <div class="category">
+                <div class="category-header">
+                    <h3>AI & Productivity</h3>
+                    <p>Intelligent automation and productivity enhancement</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>jobops</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>AI-powered motivation letter daemon with web crawling and multi-format document processing</p>
+                        <div class="tool-command">
+                            <code>jbang jobops@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang jobops@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Apache Nutch integration</li>
+                                    <li>Multi-LLM backend support</li>
+                                    <li>Real-time clipboard monitoring</li>
+                                    <li>Automatic job application generation</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Manual job applications, Cover letter generators</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>instyper</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Ultra-low latency speech-to-text conversion with hotkey activation</p>
+                        <div class="tool-command">
+                            <code>jbang instyper@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang instyper@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Real-time voice recognition</li>
+                                    <li>Multi-language support</li>
+                                    <li>Background processing</li>
+                                    <li>Custom hotkey bindings</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Dragon NaturallySpeaking, Windows Speech Recognition</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>offlan</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Completely offline translator supporting 90+ language pairs</p>
+                        <div class="tool-command">
+                            <code>jbang offlan@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang offlan@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>LibreTranslate integration</li>
+                                    <li>Bulk file processing</li>
+                                    <li>Privacy-focused offline operation</li>
+                                    <li>90+ language pairs</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Google Translate, DeepL</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>inspeak</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Instant text-to-speech engine with file monitoring</p>
+                        <div class="tool-command">
+                            <code>jbang inspeak@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang inspeak@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>File monitoring</li>
+                                    <li>Natural voice synthesis</li>
+                                    <li>Hotkey activation</li>
+                                    <li>Cross-platform TTS</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>NVDA, Built-in TTS engines</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>qproj</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Quick project generator with 100k+ templates for all tech stacks</p>
+                        <div class="tool-command">
+                            <code>jbang qproj@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang qproj@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>100k+ project templates</li>
+                                    <li>Maven/Gradle/Node support</li>
+                                    <li>Spring Boot integration</li>
+                                    <li>Best practices enforcement</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Spring Initializr, Yeoman, create-react-app</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Monitoring & Performance -->
+            <div class="category">
+                <div class="category-header">
+                    <h3>System Monitoring & Performance</h3>
+                    <p>Real-time system monitoring and performance optimization</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>pertun</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Performance tuning tool optimizing OS settings for maximum efficiency</p>
+                        <div class="tool-command">
+                            <code>jbang pertun@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang pertun@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>CPU/GPU optimization</li>
+                                    <li>Battery management</li>
+                                    <li>Temperature control</li>
+                                    <li>Overclocking support</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>MSI Afterburner, ThrottleStop, Intel XTU</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>sysmon</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Comprehensive system monitoring with customizable tray indicators</p>
+                        <div class="tool-command">
+                            <code>jbang sysmon@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang sysmon@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>CPU/Memory/Temperature monitoring</li>
+                                    <li>Custom alert thresholds</li>
+                                    <li>Historical data tracking</li>
+                                    <li>System tray integration</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>iStat Menus, HWiNFO, System Monitor</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>netwatch</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Real-time network traffic monitoring and bandwidth analysis</p>
+                        <div class="tool-command">
+                            <code>jbang netwatch@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang netwatch@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Real-time traffic visualization</li>
+                                    <li>Bandwidth usage tracking</li>
+                                    <li>Per-application monitoring</li>
+                                    <li>Data limit alerts</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>NetTraffic, GlassWire, Bandwidth Monitor</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>procman</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Advanced process manager with resource monitoring</p>
+                        <div class="tool-command">
+                            <code>jbang procman@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang procman@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Process tree visualization</li>
+                                    <li>Resource usage tracking</li>
+                                    <li>Kill/suspend processes</li>
+                                    <li>Startup program management</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Process Explorer, Activity Monitor, System Monitor</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>diskman</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Disk usage analyzer and cleanup utility</p>
+                        <div class="tool-command">
+                            <code>jbang diskman@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang diskman@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Visual disk usage maps</li>
+                                    <li>Duplicate file detection</li>
+                                    <li>Large file finder</li>
+                                    <li>Automated cleanup rules</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>WinDirStat, DaisyDisk, ncdu</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>powmon</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Battery and power management with intelligent optimization</p>
+                        <div class="tool-command">
+                            <code>jbang powmon@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang powmon@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Battery health monitoring</li>
+                                    <li>Power profile automation</li>
+                                    <li>Charging optimization</li>
+                                    <li>Sleep/hibernate control</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>AlDente, BatteryBar, PowerTOP</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue with remaining categories... -->
+            <!-- Security & Privacy -->
+            <div class="category">
+                <div class="category-header">
+                    <h3>Security & Privacy</h3>
+                    <p>Enhanced security and privacy protection tools</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>lazyme</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Cross-platform face recognition authentication system</p>
+                        <div class="tool-command">
+                            <code>jbang lazyme@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang lazyme@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Biometric authentication</li>
+                                    <li>Encrypted credential storage</li>
+                                    <li>Anti-spoofing protection</li>
+                                    <li>Cross-platform compatibility</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Windows Hello, Touch ID, Howdy</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>safeclip</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>AI-powered clipboard security scanner with threat detection</p>
+                        <div class="tool-command">
+                            <code>jbang safeclip@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang safeclip@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Real-time URL scanning</li>
+                                    <li>Malware detection</li>
+                                    <li>Privacy protection</li>
+                                    <li>Security notifications</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Malwarebytes Browser Guard, URL Void</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>mahrem</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Universal end-to-end encryption for any messaging platform</p>
+                        <div class="tool-command">
+                            <code>jbang mahrem@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang mahrem@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Universal message encryption</li>
+                                    <li>Keyboard-based activation</li>
+                                    <li>Shared key management</li>
+                                    <li>Cross-platform support</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Signal, ProtonMail, Wickr</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>vaultray</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Lightweight password manager with system tray quick access</p>
+                        <div class="tool-command">
+                            <code>jbang vaultray@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang vaultray@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Encrypted password storage</li>
+                                    <li>Tray icon quick access</li>
+                                    <li>Auto-fill capabilities</li>
+                                    <li>Cross-platform sync</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>1Password, Bitwarden, KeePass</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue with other categories... -->
+            <!-- Media & Capture -->
+            <div class="category">
+                <div class="category-header">
+                    <h3>Media & Capture</h3>
+                    <p>Advanced media processing and screen capture tools</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>screengrab</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Professional screen capture tool with AI-powered annotation</p>
+                        <div class="tool-command">
+                            <code>jbang screengrab@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang screengrab@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Multi-format capture</li>
+                                    <li>AI annotation</li>
+                                    <li>OCR text extraction</li>
+                                    <li>Cloud upload integration</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Greenshot, Snagit, LightShot</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>medilook</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>AI-powered video content search across multiple sources</p>
+                        <div class="tool-command">
+                            <code>jbang medilook@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang medilook@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Cross-video search</li>
+                                    <li>Timestamp extraction</li>
+                                    <li>Content analysis</li>
+                                    <li>Batch processing</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Video search engines, Media indexers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>newlook</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Real-time appearance modification using computer vision</p>
+                        <div class="tool-command">
+                            <code>jbang newlook@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang newlook@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Real-time face tracking</li>
+                                    <li>Privacy-focused processing</li>
+                                    <li>Low-latency video processing</li>
+                                    <li>Professional quality</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>DeepFake apps, Snapchat filters, OBS filters</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>audioctl</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Advanced audio control with device switching and volume management</p>
+                        <div class="tool-command">
+                            <code>jbang audioctl@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang audioctl@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Device switching</li>
+                                    <li>Per-app volume control</li>
+                                    <li>Audio enhancement</li>
+                                    <li>Hotkey shortcuts</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>SoundSwitch, Audio Switcher, tb-vol-scroll</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- File & Clipboard Management -->
+            <div class="category">
+                <div class="category-header">
+                    <h3>File & Clipboard Management</h3>
+                    <p>Enhanced file operations and clipboard functionality</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>clipstack</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Advanced clipboard manager with unlimited history and smart organization</p>
+                        <div class="tool-command">
+                            <code>jbang clipstack@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang clipstack@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Unlimited clipboard history</li>
+                                    <li>Smart categorization</li>
+                                    <li>Cross-device sync</li>
+                                    <li>Search functionality</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Ditto, Maccy, ClipIt, CopyQ</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>quickfile</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Lightning-fast file search and access utility</p>
+                        <div class="tool-command">
+                            <code>jbang quickfile@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang quickfile@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Instant file search</li>
+                                    <li>Recent files tracking</li>
+                                    <li>Quick file access</li>
+                                    <li>Indexing optimization</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Everything, Alfred, Spotlight</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>filewatch</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Real-time file system monitoring with intelligent notifications</p>
+                        <div class="tool-command">
+                            <code>jbang filewatch@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang filewatch@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Real-time file monitoring</li>
+                                    <li>Custom watch rules</li>
+                                    <li>Change notifications</li>
+                                    <li>Automated actions</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>FileSystemWatcher, fswatch, chokidar</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>syncmate</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Intelligent file synchronization with conflict resolution</p>
+                        <div class="tool-command">
+                            <code>jbang syncmate@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang syncmate@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Bi-directional sync</li>
+                                    <li>Conflict resolution</li>
+                                    <li>Version tracking</li>
+                                    <li>Cloud integration</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Syncthing, FreeFileSync, rsync</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Window & System Control -->
+            <div class="category">
+                <div class="category-header">
+                    <h3>Window & System Control</h3>
+                    <p>Window management and system control utilities</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>winman</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Advanced window management with intelligent layouts</p>
+                        <div class="tool-command">
+                            <code>jbang winman@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang winman@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Automatic window tiling</li>
+                                    <li>Custom layouts</li>
+                                    <li>Multi-monitor support</li>
+                                    <li>Keyboard shortcuts</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Rectangle, UltraMon, FancyZones</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>trayorg</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>System tray organizer with customizable layouts</p>
+                        <div class="tool-command">
+                            <code>jbang trayorg@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang trayorg@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Tray icon management</li>
+                                    <li>Custom grouping</li>
+                                    <li>Hide/show controls</li>
+                                    <li>Priority ordering</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Bartender, Hidden Bar, Ice</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>displayctl</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Advanced display control with auto-brightness and color management</p>
+                        <div class="tool-command">
+                            <code>jbang displayctl@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang displayctl@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Auto-brightness control</li>
+                                    <li>Color temperature adjustment</li>
+                                    <li>Multi-monitor management</li>
+                                    <li>Profile switching</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>f.lux, MonitorControl, BetterDisplay</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>quickset</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Rapid system settings access and control</p>
+                        <div class="tool-command">
+                            <code>jbang quickset@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang quickset@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Quick settings panel</li>
+                                    <li>Custom shortcuts</li>
+                                    <li>Batch operations</li>
+                                    <li>Setting profiles</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>One Switch, System settings shortcuts</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>servicectl</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>System service manager with intelligent monitoring</p>
+                        <div class="tool-command">
+                            <code>jbang servicectl@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang servicectl@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Service monitoring</li>
+                                    <li>Start/stop control</li>
+                                    <li>Dependency tracking</li>
+                                    <li>Performance metrics</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Services.msc, systemctl, Service Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network & Communication -->
+            <div class="category">
+                <div class="category-header">
+                    <h3>Network & Communication</h3>
+                    <p>Network monitoring and communication tools</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>voicebytes</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Advanced audio analysis with speaker isolation and timeline detection</p>
+                        <div class="tool-command">
+                            <code>jbang voicebytes@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang voicebytes@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Speaker count detection</li>
+                                    <li>Voice isolation</li>
+                                    <li>Real-time processing</li>
+                                    <li>Multi-language support</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Audio analysis tools, Speaker recognition software</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>netguard</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Network security monitor with real-time threat detection</p>
+                        <div class="tool-command">
+                            <code>jbang netguard@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang netguard@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Traffic analysis</li>
+                                    <li>Threat detection</li>
+                                    <li>Firewall integration</li>
+                                    <li>Connection monitoring</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Little Snitch, GlassWire, Wireshark</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>vpnmon</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>VPN connection monitor with automatic failover</p>
+                        <div class="tool-command">
+                            <code>jbang vpnmon@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang vpnmon@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Connection monitoring</li>
+                                    <li>Automatic reconnection</li>
+                                    <li>Kill switch functionality</li>
+                                    <li>Multi-provider support</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>VPN client monitors, Connection watchers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>pingmon</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Network connectivity monitor with intelligent diagnostics</p>
+                        <div class="tool-command">
+                            <code>jbang pingmon@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang pingmon@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Continuous ping monitoring</li>
+                                    <li>Latency tracking</li>
+                                    <li>Connection diagnostics</li>
+                                    <li>Alert notifications</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>PingPlotter, Network monitors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development & Automation -->
+            <div class="category">
+                <div class="category-header">
+                    <h3>Development & Automation</h3>
+                    <p>Developer productivity and automation tools</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>facebytes</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Event photo management with intelligent face detection and privacy features</p>
+                        <div class="tool-command">
+                            <code>jbang facebytes@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang facebytes@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Face detection</li>
+                                    <li>Privacy anonymization</li>
+                                    <li>Batch processing</li>
+                                    <li>Event organization</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Photo management tools, Face recognition apps</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>visiplay</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>Touchless gaming platform using hand-tracking technology</p>
+                        <div class="tool-command">
+                            <code>jbang visiplay@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang visiplay@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Hand tracking</li>
+                                    <li>Gesture recognition</li>
+                                    <li>Classic game support</li>
+                                    <li>Real-time processing</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Touchless gaming, Gesture controllers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h4>feedme</h4>
+                            <button class="expand-btn" onclick="toggleDetails(this)">+</button>
+                        </div>
+                        <p>AI-powered food inspection and nutrition analysis with meal planning</p>
+                        <div class="tool-command">
+                            <code>jbang feedme@jbang-tools</code>
+                            <button class="copy-btn" onclick="copyToClipboard('jbang feedme@jbang-tools')">Copy</button>
+                        </div>
+                        <div class="tool-details hidden">
+                            <div class="features">
+                                <h5>Key Features:</h5>
+                                <ul>
+                                    <li>Defect detection</li>
+                                    <li>Nutrition analysis</li>
+                                    <li>Shelf-life prediction</li>
+                                    <li>Meal planning</li>
+                                </ul>
+                            </div>
+                            <div class="replaces">
+                                <h5>Replaces:</h5>
+                                <p>Food tracking apps, Nutrition analyzers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="installation" class="installation">
+        <div class="container">
+            <h2>Get Started in Seconds</h2>
+            <div class="install-options">
+                <div class="install-card">
+                    <h3>One-Command Install</h3>
+                    <p>Install JBang and all tools at once</p>
+                    <div class="command-block">
+                        <code>curl -s https://get.jbang.dev | bash && jbang app install jbang-tools@catalog</code>
+                        <button class="copy-btn" onclick="copyToClipboard('curl -s https://get.jbang.dev | bash && jbang app install jbang-tools@catalog')">Copy</button>
+                    </div>
+                </div>
+                <div class="install-card">
+                    <h3>Individual Tools</h3>
+                    <p>Install specific tools as needed</p>
+                    <div class="command-block">
+                        <code>jbang [tool-name]@jbang-tools</code>
+                        <button class="copy-btn" onclick="copyToClipboard('jbang [tool-name]@jbang-tools')">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="key-features">
+        <div class="container">
+            <h2>Why Choose JBang-Tools?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Zero Dependencies</h3>
+                    <p>No complex installations or system dependencies required</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Cross-Platform</h3>
+                    <p>Works seamlessly on Windows, macOS, and Linux</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Enterprise Performance</h3>
+                    <p>Java 24 & Virtual Threads deliver 70x speed improvements</p>
+                </div>
+                <div class="feature-card">
+                    <h3>AI Integration</h3>
+                    <p>Built-in support for Ollama, OpenAI, Groq, and Perplexity</p>
+                </div>
+                <div class="feature-card">
+                    <h3>System Tray</h3>
+                    <p>Professional tray integration for quick access</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Instant Updates</h3>
+                    <p>Automatic distribution and updates via JBang</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="container">
+            <h2>JBang-Tools vs Traditional Approaches</h2>
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div class="comparison-feature">Feature</div>
+                    <div class="comparison-traditional">Traditional Tools</div>
+                    <div class="comparison-jbang">JBang-Tools</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-feature">Installation</div>
+                    <div class="comparison-traditional">Complex, multiple downloads</div>
+                    <div class="comparison-jbang">One command</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-feature">Dependencies</div>
+                    <div class="comparison-traditional">System-specific requirements</div>
+                    <div class="comparison-jbang">Zero dependencies</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-feature">Performance</div>
+                    <div class="comparison-traditional">Varies, often resource-heavy</div>
+                    <div class="comparison-jbang">70x faster with Virtual Threads</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-feature">Updates</div>
+                    <div class="comparison-traditional">Manual update checking</div>
+                    <div class="comparison-jbang">Automatic via JBang</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-feature">Cross-Platform</div>
+                    <div class="comparison-traditional">Platform-specific versions</div>
+                    <div class="comparison-jbang">Universal compatibility</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 JBang-Tools. The Ultimate Cross-Platform Java Application Ecosystem.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
