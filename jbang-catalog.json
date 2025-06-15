@@ -174,6 +174,331 @@
       "description": "AI-powered food inspection and nutrition analysis",
       "script-ref": "feedme/Feedme.java",
       "tags": ["feedme", "ai", "food", "inspection", "nutrition", "analysis"]
+    },
+    "codewatch": {
+      "description": "Real-time code quality monitor that analyzes your codebase continuously, detecting code smells, security vulnerabilities, and performance bottlenecks with AI-powered suggestions for improvement.",
+      "script-ref": "codewatch/CodeWatch.java",
+      "tags": ["codewatch"]
+    },
+    "gitflow": {
+      "description": "Advanced Git workflow manager with visual branch management, automated conflict resolution, intelligent merge strategies, and team collaboration insights with productivity analytics.",
+      "script-ref": "gitflow/GitFlow.java",
+      "tags": ["gitflow"]
+    },
+    "apitest": {
+      "description": "Comprehensive API testing framework with automated test generation from OpenAPI specs, performance benchmarking, load testing, and real-time monitoring with alerting.",
+      "script-ref": "apitest/ApiTest.java",
+      "tags": ["apitest"]
+    },
+    "docgen": {
+      "description": "Intelligent documentation generator that creates comprehensive API docs, README files, and technical specifications from code comments, structure analysis, and usage patterns.",
+      "script-ref": "docgen/DocGen.java",
+      "tags": ["docgen"]
+    },
+    "depcheck": {
+      "description": "Dependency vulnerability scanner and updater that monitors security issues, license compliance, version compatibility, and provides automated update suggestions with impact analysis.",
+      "script-ref": "depcheck/DepCheck.java",
+      "tags": ["depcheck"]
+    },
+    "buildopt": {
+      "description": "Build optimization analyzer that identifies bottlenecks in compilation processes, suggests performance improvements, and provides detailed metrics for faster development cycles.",
+      "script-ref": "buildopt/BuildOpt.java",
+      "tags": ["buildopt"]
+    },
+    "testgen": {
+      "description": "AI-powered unit test generator that creates comprehensive test suites based on code analysis, coverage requirements, and best practices with mutation testing support.",
+      "script-ref": "testgen/TestGen.java",
+      "tags": ["testgen"]
+    },
+    "logview": {
+      "description": "Advanced log analyzer with pattern recognition, anomaly detection, intelligent filtering, and real-time debugging assistance for complex distributed applications.",
+      "script-ref": "logview/LogView.java",
+      "tags": ["logview"]
+    },
+    "perfmon": {
+      "description": "Real-time application performance monitor with memory profiling, CPU usage analysis, database query optimization, and performance bottleneck identification.",
+      "script-ref": "perfmon/PerfMon.java",
+      "tags": ["perfmon"]
+    },
+    "coderev": {
+      "description": "AI-powered code review assistant that provides instant feedback on code quality, security vulnerabilities, performance optimizations, and adherence to coding standards.",
+      "script-ref": "coderev/CodeRev.java",
+      "tags": ["coderev"]
+    },
+    "dbtools": {
+      "description": "Database management toolkit with query optimization, schema analysis, data migration tools, and performance monitoring across multiple database engines.",
+      "script-ref": "dbtools/DbTools.java",
+      "tags": ["dbtools"]
+    },
+    "envman": {
+      "description": "Environment management tool that handles configuration across development, staging, and production environments with secret management and deployment automation.",
+      "script-ref": "envman/EnvMan.java",
+      "tags": ["envman"]
+    },
+    "mockgen": {
+      "description": "API mocking service generator that creates realistic mock APIs from specifications, supports dynamic responses, and provides testing scenarios.",
+      "script-ref": "mockgen/MockGen.java",
+      "tags": ["mockgen"]
+    },
+    "refactor": {
+      "description": "Intelligent code refactoring assistant that suggests improvements, automates common refactoring patterns, and ensures code quality during transformations.",
+      "script-ref": "refactor/Refactor.java",
+      "tags": ["refactor"]
+    },
+    "metrics": {
+      "description": "Development metrics dashboard that tracks productivity, code quality, deployment frequency, and team performance with actionable insights.",
+      "script-ref": "metrics/Metrics.java",
+      "tags": ["metrics"]
+    },
+    "exptrack": {
+      "description": "Advanced expense tracking with receipt scanning using OCR, automatic categorization with AI, tax preparation support, and multi-currency handling with real-time exchange rates.",
+      "script-ref": "exptrack/ExpTrack.java",
+      "tags": ["exptrack"]
+    },
+    "invoicegen": {
+      "description": "Professional invoice generator with customizable templates, payment tracking, client management, automated reminders, and integration with accounting systems.",
+      "script-ref": "invoicegen/InvoiceGen.java",
+      "tags": ["invoicegen"]
+    },
+    "budgetplan": {
+      "description": "Intelligent budget planning tool with expense forecasting, goal tracking, financial health analysis, and investment recommendations based on spending patterns.",
+      "script-ref": "budgetplan/BudgetPlan.java",
+      "tags": ["budgetplan"]
+    },
+    "taxcalc": {
+      "description": "Multi-jurisdiction tax calculator with deduction optimization, filing assistance, audit support, and real-time tax law updates with compliance checking.",
+      "script-ref": "taxcalc/TaxCalc.java",
+      "tags": ["taxcalc"]
+    },
+    "cryptotrack": {
+      "description": "Cryptocurrency portfolio tracker with real-time prices, profit/loss analysis, tax reporting, DeFi integration, and market sentiment analysis.",
+      "script-ref": "cryptotrack/CryptoTrack.java",
+      "tags": ["cryptotrack"]
+    },
+    "stockmon": {
+      "description": "Stock market monitor with portfolio tracking, alert systems, technical analysis tools, and AI-powered trading insights with risk assessment.",
+      "script-ref": "stockmon/StockMon.java",
+      "tags": ["stockmon"]
+    },
+    "bizplan": {
+      "description": "Business plan generator with financial projections, market analysis, presentation templates, and investor pitch deck creation with industry benchmarks.",
+      "script-ref": "bizplan/BizPlan.java",
+      "tags": ["bizplan"]
+    },
+    "leadmgr": {
+      "description": "Lead management system with contact tracking, follow-up scheduling, conversion analysis, and sales pipeline optimization with CRM integration.",
+      "script-ref": "leadmgr/LeadMgr.java",
+      "tags": ["leadmgr"]
+    },
+    "contractmgr": {
+      "description": "Contract management with template library, renewal tracking, compliance monitoring, and automated workflow management with legal review assistance.",
+      "script-ref": "contractmgr/ContractMgr.java",
+      "tags": ["contractmgr"]
+    },
+    "payroll": {
+      "description": "Payroll management system with tax calculations, benefit administration, time tracking integration, and compliance reporting across multiple jurisdictions.",
+      "script-ref": "payroll/Payroll.java",
+      "tags": ["payroll"]
+    },
+    "imgproc": {
+      "description": "Batch image processor with AI-powered optimization, format conversion, quality enhancement, watermarking, and metadata management with cloud storage integration.",
+      "script-ref": "imgproc/ImgProc.java",
+      "tags": ["imgproc"]
+    },
+    "vidconv": {
+      "description": "Video converter with format optimization, compression algorithms, batch processing, subtitle management, and quality preservation with GPU acceleration.",
+      "script-ref": "vidconv/VidConv.java",
+      "tags": ["vidconv"]
+    },
+    "audiocut": {
+      "description": "Audio editor with noise reduction, format conversion, automated podcast processing, voice enhancement, and multi-track editing capabilities.",
+      "script-ref": "audiocut/AudioCut.java",
+      "tags": ["audiocut"]
+    },
+    "pdftools": {
+      "description": "Comprehensive PDF toolkit with merging, splitting, OCR, form processing, digital signatures, and batch operations with security features.",
+      "script-ref": "pdftools/PdfTools.java",
+      "tags": ["pdftools"]
+    },
+    "markconv": {
+      "description": "Markdown converter with multiple output formats, template support, automated styling, and integration with documentation platforms.",
+      "script-ref": "markconv/MarkConv.java",
+      "tags": ["markconv"]
+    },
+    "codebeaut": {
+      "description": "Code beautifier and formatter supporting 100+ programming languages with customizable style guides, team standards, and automated formatting.",
+      "script-ref": "codebeaut/CodeBeaut.java",
+      "tags": ["codebeaut"]
+    },
+    "thumbgen": {
+      "description": "Thumbnail generator for videos and images with batch processing, customizable templates, and automated optimization for different platforms.",
+      "script-ref": "thumbgen/ThumbGen.java",
+      "tags": ["thumbgen"]
+    },
+    "watermark": {
+      "description": "Batch watermarking tool with customizable overlays, transparency control, position management, and copyright protection features.",
+      "script-ref": "watermark/Watermark.java",
+      "tags": ["watermark"]
+    },
+    "fontmgr": {
+      "description": "Font management tool with preview capabilities, installation automation, collection organization, and licensing compliance tracking.",
+      "script-ref": "fontmgr/FontMgr.java",
+      "tags": ["fontmgr"]
+    },
+    "colorpal": {
+      "description": "Color palette generator and manager with accessibility checking, brand consistency tools, and design system integration.",
+      "script-ref": "colorpal/ColorPal.java",
+      "tags": ["colorpal"]
+    },
+    "designkit": {
+      "description": "Design toolkit with asset management, style guide generation, mockup creation, and collaboration features for design teams.",
+      "script-ref": "designkit/DesignKit.java",
+      "tags": ["designkit"]
+    },
+    "brandkit": {
+      "description": "Brand management tool with logo variations, color schemes, typography guidelines, and asset distribution with usage tracking.",
+      "script-ref": "brandkit/BrandKit.java",
+      "tags": ["brandkit"]
+    },
+    "healthlog": {
+      "description": "Comprehensive health tracking with symptom logging, medication reminders, doctor appointment scheduling, and health trend analysis with AI insights.",
+      "script-ref": "healthlog/HealthLog.java",
+      "tags": ["healthlog"]
+    },
+    "fittrack": {
+      "description": "Fitness tracker with workout planning, progress monitoring, nutrition guidance, and integration with wearable devices and health platforms.",
+      "script-ref": "fittrack/FitTrack.java",
+      "tags": ["fittrack"]
+    },
+    "sleepmon": {
+      "description": "Sleep monitor with pattern analysis, quality assessment, improvement recommendations, and integration with smart home devices for optimization.",
+      "script-ref": "sleepmon/SleepMon.java",
+      "tags": ["sleepmon"]
+    },
+    "moodtrack": {
+      "description": "Mood tracking with pattern recognition, trigger identification, wellness suggestions, and mental health resources with professional referrals.",
+      "script-ref": "moodtrack/MoodTrack.java",
+      "tags": ["moodtrack"]
+    },
+    "waterrem": {
+      "description": "Water intake reminder with consumption tracking, hydration goals, health insights, and personalized recommendations based on activity levels.",
+      "script-ref": "waterrem/WaterRem.java",
+      "tags": ["waterrem"]
+    },
+    "breathe": {
+      "description": "Breathing exercise guide with stress reduction techniques, meditation timers, relaxation programs, and biometric feedback integration.",
+      "script-ref": "breathe/Breathe.java",
+      "tags": ["breathe"]
+    },
+    "eyecare": {
+      "description": "Eye care reminder with break scheduling, exercise routines, blue light monitoring, and vision health tracking with professional recommendations.",
+      "script-ref": "eyecare/EyeCare.java",
+      "tags": ["eyecare"]
+    },
+    "posture": {
+      "description": "Posture monitoring with correction reminders, exercise suggestions, ergonomic assessments, and workplace optimization recommendations.",
+      "script-ref": "posture/Posture.java",
+      "tags": ["posture"]
+    },
+    "langlearn": {
+      "description": "Language learning platform with spaced repetition, pronunciation practice, progress tracking, and cultural context integration with native speaker connections.",
+      "script-ref": "langlearn/LangLearn.java",
+      "tags": ["langlearn"]
+    },
+    "skilltrack": {
+      "description": "Skill development tracker with learning paths, progress monitoring, certification management, and career advancement recommendations.",
+      "script-ref": "skilltrack/SkillTrack.java",
+      "tags": ["skilltrack"]
+    },
+    "studyplan": {
+      "description": "Study planner with schedule optimization, progress tracking, performance analytics, and adaptive learning algorithms with peer collaboration.",
+      "script-ref": "studyplan/StudyPlan.java",
+      "tags": ["studyplan"]
+    },
+    "flashcard": {
+      "description": "Intelligent flashcard system with spaced repetition algorithms, multimedia support, and collaborative study groups with performance analytics.",
+      "script-ref": "flashcard/FlashCard.java",
+      "tags": ["flashcard"]
+    },
+    "quizgen": {
+      "description": "Quiz generator with automatic question creation, difficulty adjustment, performance analysis, and adaptive testing with learning insights.",
+      "script-ref": "quizgen/QuizGen.java",
+      "tags": ["quizgen"]
+    },
+    "mindmap": {
+      "description": "Mind mapping tool with collaborative features, export options, template libraries, and integration with note-taking and project management tools.",
+      "script-ref": "mindmap/MindMap.java",
+      "tags": ["mindmap"]
+    },
+    "readtrack": {
+      "description": "Reading tracker with progress monitoring, goal setting, recommendation systems, and book club integration with social features.",
+      "script-ref": "readtrack/ReadTrack.java",
+      "tags": ["readtrack"]
+    },
+    "notelink": {
+      "description": "Note-taking system with intelligent linking, knowledge graphs, search capabilities, and cross-platform synchronization with AI organization.",
+      "script-ref": "notelink/NoteLink.java",
+      "tags": ["notelink"]
+    },
+    "certtrack": {
+      "description": "Certification tracker with renewal reminders, study planning, career path guidance, and industry requirement monitoring.",
+      "script-ref": "certtrack/CertTrack.java",
+      "tags": ["certtrack"]
+    },
+    "knowbase": {
+      "description": "Knowledge base manager with AI-powered search, content organization, collaboration features, and expert system integration.",
+      "script-ref": "knowbase/KnowBase.java",
+      "tags": ["knowbase"]
+    },
+    "gamelib": {
+      "description": "Game library manager with playtime tracking, achievement monitoring, recommendation systems, and social features with performance analytics.",
+      "script-ref": "gamelib/GameLib.java",
+      "tags": ["gamelib"]
+    },
+    "movietrack": {
+      "description": "Movie and TV show tracker with watchlist management, rating systems, recommendation engines, and social sharing with review aggregation.",
+      "script-ref": "movietrack/MovieTrack.java",
+      "tags": ["movietrack"]
+    },
+    "bookclub": {
+      "description": "Book club organizer with reading schedules, discussion forums, progress tracking, and author event integration with social features.",
+      "script-ref": "bookclub/BookClub.java",
+      "tags": ["bookclub"]
+    },
+    "recipemgr": {
+      "description": "Recipe manager with meal planning, shopping list generation, nutritional analysis, and dietary restriction support with cooking timers.",
+      "script-ref": "recipemgr/RecipeMgr.java",
+      "tags": ["recipemgr"]
+    },
+    "travelplan": {
+      "description": "Travel planner with itinerary management, budget tracking, local recommendations, and real-time updates with emergency assistance.",
+      "script-ref": "travelplan/TravelPlan.java",
+      "tags": ["travelplan"]
+    },
+    "hobbytrack": {
+      "description": "Hobby tracker with project management, progress monitoring, community features, and skill development with tutorial integration.",
+      "script-ref": "hobbytrack/HobbyTrack.java",
+      "tags": ["hobbytrack"]
+    },
+    "eventplan": {
+      "description": "Event planner with guest management, budget tracking, timeline coordination, and vendor management with automated reminders.",
+      "script-ref": "eventplan/EventPlan.java",
+      "tags": ["eventplan"]
+    },
+    "gifttrack": {
+      "description": "Gift tracker with occasion reminders, budget management, recipient preferences, and purchase history with recommendation engine.",
+      "script-ref": "gifttrack/GiftTrack.java",
+      "tags": ["gifttrack"]
+    },
+    "petcare": {
+      "description": "Pet care manager with health tracking, appointment scheduling, care reminders, and veterinary integration with emergency contacts.",
+      "script-ref": "petcare/PetCare.java",
+      "tags": ["petcare"]
+    },
+    "plantcare": {
+      "description": "Plant care assistant with watering schedules, growth tracking, care instructions, and disease identification with expert consultation.",
+      "script-ref": "plantcare/PlantCare.java",
+      "tags": ["plantcare"]
     }
   }
 }
