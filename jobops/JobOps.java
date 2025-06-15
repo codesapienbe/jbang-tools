@@ -79,7 +79,7 @@ public class JobOps implements Callable<Integer> {
     private static final int CRAWL_DEPTH = 1; // Only crawl the main page
 
     
-    @Option(names = {"-b", "--backend"}, description = "LLM Backend (ollama, openai, groq)", defaultValue = DEFAULT_BACKEND)
+    @Option(names = {"-b", "--backend"}, description = "LLM Backend (ollama, openai, groq)")
     private String backend;
     
     @Option(names = {"--openai-key"}, description = "OpenAI API Key")
@@ -262,6 +262,24 @@ public class JobOps implements Callable<Integer> {
         // Check dependencies first
         checkDependencies();
         
+        // Prompt for backend if not provided
+        if (backend == null || backend.trim().isEmpty()) {
+            String[] options = BACKEND_CONFIGS.keySet().toArray(new String[0]);
+            String choice = (String) JOptionPane.showInputDialog(
+                null,
+                "Select LLM Backend:",
+                "Backend Required",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                options,
+                null
+            );
+            if (choice == null || choice.trim().isEmpty()) {
+                System.err.println("Backend is required.");
+                return 1;
+            }
+            backend = choice;
+        }
         // Validate backend
         if (!BACKEND_CONFIGS.containsKey(backend)) {
             System.err.println("Invalid backend: " + backend + ". Available: " + BACKEND_CONFIGS.keySet());
