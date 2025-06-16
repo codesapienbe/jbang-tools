@@ -405,7 +405,9 @@ window.JBangTools = {
 // Dynamically load tool cards from catalog
 async function loadTools() {
     try {
-        const resp = await fetch('jbang-catalog.json');
+        const CATALOG_URL = 
+            'https://raw.githubusercontent.com/codesapienbe/jbang-tools/refs/heads/master/jbang-catalog.json';
+        const resp = await fetch(CATALOG_URL);
         const catalog = await resp.json();
         const aliases = catalog.aliases;
         const toolsGrid = document.getElementById('tools-grid');
