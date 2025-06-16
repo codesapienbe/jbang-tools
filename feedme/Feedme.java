@@ -1,15 +1,30 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//DEPS dev.langchain4j:langchain4j:1.0.1
+//DEPS dev.langchain4j:langchain4j-open-ai:1.0.1
+//DEPS dev.langchain4j:langchain4j-groq:1.0.1
+//DEPS dev.langchain4j:langchain4j-ollama:1.0.1
+//DEPS dev.langchain4j:langchain4j-perplexity:1.0.1
+//FILES ../common/LLMClient.java
+
 package feedme;
 
-import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.time.Instant;
+import common.LLMClient;
 import java.nio.file.Path;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 public class Feedme {
-    public static void main(String[] args) {
-        System.out.println("Feedme app placeholder");
+    public static void main(String... args) throws Exception {
+        if (args.length == 0) {
+            System.out.println("Usage: Feedme <prompt>");
+            System.exit(1);
+        }
+        String prompt = String.join(" ", args);
+        String response = LLMClient.create().generate("Food Inspection Assistant: " + prompt);
+        System.out.println(response);
     }
 }
 
