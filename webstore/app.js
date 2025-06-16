@@ -17,6 +17,9 @@ function initializeApp() {
     
     // Initialize copy notification system
     initializeCopyNotification();
+    
+    // Dynamically load tool cards
+    loadTools();
 }
 
 // Toggle tool details expansion
@@ -38,6 +41,22 @@ function toggleDetails(button) {
         button.textContent = '×';
         button.setAttribute('aria-expanded', 'true');
         
+        // Load README.md details on first expand
+        if (details.dataset.loaded === 'false') {
+            const id = toolCard.querySelector('h4').textContent;
+            details.textContent = 'Loading details...';
+            fetch(`${id}/README.md`)
+                .then(res => res.ok ? res.text() : Promise.reject('no README'))
+                .then(md => {
+                    details.innerHTML = marked.parse(md);
+                    details.dataset.loaded = 'true';
+                })
+                .catch(err => {
+                    console.error('Error loading README for', id, err);
+                    details.textContent = 'No details available.';
+                    details.dataset.loaded = 'true';
+                });
+        }
         // Smooth scroll to show the expanded content
         setTimeout(() => {
             details.scrollIntoView({ 
@@ -382,3 +401,60 @@ window.JBangTools = {
     scrollToSection,
     trackEvent
 };
+
+// Dynamically load tool cards from catalog
+async function loadTools() {
+    try {
+        const resp = await fetch('jbang-catalog.json');
+        const catalog = await resp.json();
+        const aliases = catalog.aliases;
+        const toolsGrid = document.getElementById('tools-grid');
+        Object.entries(aliases).forEach(([id, entry]) => {
+            toolsGrid.appendChild(createToolCard(id, entry));
+        });
+    } catch (e) {
+        console.error('Failed to load tool catalog', e);
+    }
+}
+
+// Create a tool-card element for a given module
+function createToolCard(id, entry) {
+    const card = document.createElement('div');
+    card.className = 'tool-card';
+
+    const header = document.createElement('div');
+    header.className = 'tool-header';
+    const title = document.createElement('h4');
+    title.textContent = id;
+    const expandBtn = document.createElement('button');
+    expandBtn.className = 'expand-btn';
+    expandBtn.textContent = '+';
+    expandBtn.setAttribute('aria-expanded', 'false');
+    expandBtn.addEventListener('click', () => toggleDetails(expandBtn));
+    header.appendChild(title);
+    header.appendChild(expandBtn);
+    card.appendChild(header);
+
+    const p = document.createElement('p');
+    p.textContent = entry.description;
+    card.appendChild(p);
+
+    const cmdDiv = document.createElement('div');
+    cmdDiv.className = 'tool-command';
+    const code = document.createElement('code');
+    code.textContent = `jbang ${id}@jbang-tools`;
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'copy-btn';
+    copyBtn.textContent = 'Copy';
+    copyBtn.addEventListener('click', () => copyToClipboard(`jbang ${id}@jbang-tools`));
+    cmdDiv.appendChild(code);
+    cmdDiv.appendChild(copyBtn);
+    card.appendChild(cmdDiv);
+
+    const details = document.createElement('div');
+    details.className = 'tool-details hidden';
+    details.dataset.loaded = 'false';
+    card.appendChild(details);
+
+    return card;
+}
